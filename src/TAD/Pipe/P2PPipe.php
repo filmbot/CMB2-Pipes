@@ -42,7 +42,7 @@ class TAD_Pipe_P2PPipe extends TAD_Pipe_AbstractPipe implements TAD_Pipe_PipeInt
 			return $override;
 		}
 
-		$related = get_posts( array(
+		$related = new  WP_Query( array(
 			'fields'              => 'ids',
 			'nopaging'            => true,
 			'suppress_filters'    => false,
@@ -51,7 +51,7 @@ class TAD_Pipe_P2PPipe extends TAD_Pipe_AbstractPipe implements TAD_Pipe_PipeInt
 			'connected_direction' => $this->get_connection_direction()
 		) );
 
-		return $args['repeat'] ? $related : reset( $related );
+		return $args['repeat'] ? $related->posts : reset( $related->posts );
 	}
 
 	public function remove( $override, array $args, array $field_args, CMB2_Field $field ) {
