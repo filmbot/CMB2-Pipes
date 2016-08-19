@@ -51,7 +51,10 @@ class TAD_Pipe_P2PPipe extends TAD_Pipe_AbstractPipe implements TAD_Pipe_PipeInt
 			'connected_direction' => $this->get_connection_direction()
 		) );
 
-		return $args['repeat'] ? $related->posts : reset( $related->posts );
+		$p2p_type = p2p_type( $this->target );
+		$multi    = $p2p_type->cardinality[ $this->get_opposite_direction() ] == 'many';
+
+		return $multi ? $related->posts : reset( $related->posts );
 	}
 
 	public function remove( $override, array $args, array $field_args, CMB2_Field $field ) {
@@ -72,5 +75,16 @@ class TAD_Pipe_P2PPipe extends TAD_Pipe_AbstractPipe implements TAD_Pipe_PipeInt
 
 		return $connection_direction;
 	}
+	
+		/**
+	 * @return string
+	 */
+	private function get_opposite_direction()
+	{
+		$opposite_direction = $this->get_connection_direction() == 'from' ? 'to' : 'from';
+
+		return $opposite_direction;
+	}
+
 
 }
