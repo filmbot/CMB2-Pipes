@@ -25,10 +25,12 @@ class TAD_Pipe_P2PPipe extends TAD_Pipe_AbstractPipe implements TAD_Pipe_PipeInt
 		$connection_direction = $this->get_connection_direction();
 
 		if ( $connection_direction == 'from' ) {
+			p2p_delete_connections( $this->target, array( 'from' => $args['id'] ) );
 			foreach ( $value as $id ) {
 				$p2p_type->connect( $args['id'], $id );
 			}
 		} else {
+			p2p_delete_connections( $this->target, array( 'to' => $args['id'] ) );
 			foreach ( $value as $id ) {
 				$p2p_type->connect( $id, $args['id'] );
 			}
