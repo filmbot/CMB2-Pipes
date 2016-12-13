@@ -63,7 +63,7 @@ class TAD_Pipe_Piper {
 			'post_type'             => 'post',
 			'post_mime_type'        => 'post',
 			'comment_count'         => 'post',
-			'p2p'                   => 'p2p'
+			'p2p'                   => 'P2P'
 		);
 
 		return $legit_targets;
