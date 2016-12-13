@@ -21,6 +21,13 @@ class TAD_Pipe_P2PPipe extends TAD_Pipe_AbstractPipe implements TAD_Pipe_PipeInt
 		if ( empty( $p2p_type ) ) {
 			return;
 		}
+		
+		// If this connection type only allows one connection, we have to remove the existing one first
+		$single    = $p2p_type->cardinality[ $this->get_opposite_direction() ] == 'one';
+		if ( $single )
+		{
+			p2p_delete_connections( $this->target, array( $this->get_connection_direction() => $args['id'] ) );
+		}
 
 		$connection_direction = $this->get_connection_direction();
 
