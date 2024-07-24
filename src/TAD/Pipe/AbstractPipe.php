@@ -6,6 +6,11 @@ class TAD_Pipe_AbstractPipe implements TAD_Pipe_SettablePropertiesInterface {
 	/**
 	 * @var string
 	 */
+	public $connection_direction;
+
+	/**
+	 * @var string
+	 */
 	protected $field_id;
 
 	/**
